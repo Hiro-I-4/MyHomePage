@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hiro — Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+  <div class="bg-orbit"></div>
+
+  <header class="site-header">
+    <div class="site-logo">
+      <span class="logo-mark">HI</span>
+      <span class="logo-text">Hiro</span>
+    </div>
+    <nav class="site-nav">
+      <a href="../intro/" class="nav-link">Top</a>
+      <a href="../studies/" class="nav-link">Studies</a>
+      <a href="../studies/origami/" class="nav-link">Origami App</a>
+      <a href="./" class="nav-link active">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="content-hero content-hero--simple">
+      <div class="hero-inner hero-inner--single">
+        <div class="hero-text">
+          <p class="hero-kicker">Contact</p>
+          <h1 class="hero-title">
+            Say <span class="hero-name">hello</span>.
+          </h1>
+          <p class="hero-desc">
+            If you’d like to talk about origami, math, or projects, feel free to reach out.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h2 class="card-title">Email</h2>
+            <p class="card-text" style="word-break: break-all;">
+              <span id="emailText">yourname@example.com</span>
+            </p>
+            <div class="mini-row" style="margin-top:12px;">
+              <button class="btn btn-primary" id="copyEmailBtn" type="button">Copy</button>
+              <a class="btn btn-ghost" id="mailtoBtn" href="mailto:yourname@example.com?subject=Hello%20Hiro">Open mail app</a>
+            </div>
+            <p class="card-note" style="margin-top:10px;">
+              Tip: Replace the email above with your real address.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2 class="card-title">About</h2>
+            <p class="card-note">
+              Student • Math & Origami • Japan (JST)
+            </p>
+            <hr class="hr-soft" />
+            <div class="badges">
+              <span class="badge">JST (UTC+9)</span>
+              <span class="badge">Open to feedback</span>
+              <span class="badge">Project collaboration</span>
+            </div>
+          </article>
+        </div>
+
+        <article class="card" style="margin-top:18px;">
+          <h2 class="card-title">Message (mailto)</h2>
+          <p class="card-note">
+            This form uses <code>mailto:</code> (no server). It opens your email client with a draft.
+          </p>
+
+          <form class="form" id="contactForm">
+            <input class="input" type="text" id="name" placeholder="Your name" autocomplete="name" />
+            <input class="input" type="email" id="email" placeholder="Your email" autocomplete="email" />
+            <input class="input" type="text" id="subject" placeholder="Subject" />
+            <textarea class="textarea" id="message" placeholder="Message"></textarea>
+
+            <div class="mini-row">
+              <button class="btn btn-primary" type="submit">Create email draft</button>
+              <button class="btn btn-ghost" type="reset">Clear</button>
+            </div>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> Hiro</small>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // --- Copy email ---
+    const email = "yourname@example.com";
+    const emailText = document.getElementById("emailText");
+    const mailtoBtn = document.getElementById("mailtoBtn");
+    emailText.textContent = email;
+    mailtoBtn.href = `mailto:${email}?subject=Hello%20Hiro`;
+
+    document.getElementById("copyEmailBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        const btn = document.getElementById("copyEmailBtn");
+        const old = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => (btn.textContent = old), 900);
+      } catch (e) {
+        alert("Copy failed. Please copy manually.");
+      }
+    });
+
+    // --- mailto form draft ---
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const from = document.getElementById("email").value.trim();
+      const subject = document.getElementById("subject").value.trim() || "Hello";
+      const msg = document.getElementById("message").value.trim();
+
+      const body =
+        `Name: ${name}\n` +
+        `Email: ${from}\n\n` +
+        `${msg}\n`;
+
+      const url =
+        `mailto:${email}?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>

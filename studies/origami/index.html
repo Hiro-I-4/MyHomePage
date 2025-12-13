@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hiro — Origami App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../../assets/css/site.css" />
+</head>
+<body>
+  <div class="bg-orbit"></div>
+
+  <header class="site-header">
+    <div class="site-logo">
+      <span class="logo-mark">HI</span>
+      <span class="logo-text">Hiro</span>
+    </div>
+    <nav class="site-nav">
+      <a href="../../intro/" class="nav-link">Top</a>
+      <a href="../" class="nav-link">Studies</a>
+      <a href="./" class="nav-link active">Origami App</a>
+      <a href="../../contact/" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="content-hero content-hero--simple">
+      <div class="hero-inner hero-inner--split">
+        <div class="hero-text">
+          <p class="hero-kicker">Origami App • Prototype</p>
+          <h1 class="hero-title">
+            Generate crease patterns from <span class="hero-name">polygon data</span>.
+          </h1>
+          <p class="hero-desc">
+            This is a small app I built to turn my “hand-made” procedures into a repeatable
+            pipeline: input a polygon, run geometric steps, and output a crease pattern as SVG.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#features">See features</a>
+            <a class="btn btn-ghost" href="../index.html">Back to Studies</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- ここはアプリのスクショに差し替え推奨 -->
+          <img class="hero-image" src="../../assets/images/KEIO-fold.png" alt="Origami app preview" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <h2 class="section-title">What the app can do</h2>
+        <p class="section-lead">
+          The goal is not “perfect origami” — it’s a tool for experimenting with geometry.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3 class="card-title">Interactive input</h3>
+            <p class="card-text">
+              Draw a polygon (or load one), edit vertices, and quickly iterate.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">Automatic generation</h3>
+            <p class="card-text">
+              Run the pipeline and generate a crease pattern automatically.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">SVG output</h3>
+            <p class="card-text">
+              Export results as SVG so you can print, share, or refine patterns in other tools.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">How it works (concept)</h2>
+        <p class="section-lead">
+          A simple mental model of the pipeline. (You can rewrite this to match your real implementation.)
+        </p>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3 class="card-title">1) Parse & model</h3>
+            <p class="card-note">
+              Convert points into a clean internal representation:
+              <code>Point</code>, <code>Segment</code>, <code>Polygon</code>.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2) Construct structure</h3>
+            <p class="card-note">
+              Build “skeleton-like” relationships, bisectors, or other helper lines that
+              guide crease generation.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3) Emit SVG</h3>
+            <p class="card-note">
+              Output a new SVG: original polygon + crease lines, ready for testing on paper.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4) Iterate</h3>
+            <p class="card-note">
+              Change the polygon, tweak parameters, regenerate — quick experiments are the point.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Tech stack</h2>
+        <p class="section-lead">
+          The app is a practice in making math ideas executable and testable.
+        </p>
+        <div class="card">
+          <div class="badges">
+            <span class="badge">Python</span>
+            <span class="badge">numpy</span>
+            <span class="badge">SVG</span>
+            <span class="badge">Geometry utilities</span>
+            <span class="badge">GUI prototyping</span>
+          </div>
+          <hr class="hr-soft" />
+          <p class="card-note">
+            I focus on readability and structure: small helper functions, clear data models,
+            and explicit handling of special cases.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Roadmap</h2>
+        <p class="section-lead">
+          A realistic next-step list (short, clear, and “devlog”っぽい雰囲気になります).
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <h3 class="card-title">Algorithmic</h3>
+            <ul class="bullet-list">
+              <li>Support more complex polygons and multiple components.</li>
+              <li>Improve stability around collinear edges and tight angles.</li>
+              <li>Reduce fold count in practical constraints.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 class="card-title">Product / UX</h3>
+            <ul class="bullet-list">
+              <li>Add presets and example shapes (letters, symbols, logos).</li>
+              <li>Better export options (layered SVG, print-friendly view).</li>
+              <li>Clear “how to fold” hint view (even if approximate).</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> Hiro</small>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

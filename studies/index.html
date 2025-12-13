@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hiro — Studies</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+  <div class="bg-orbit"></div>
+
+  <header class="site-header">
+    <div class="site-logo">
+      <span class="logo-mark">HI</span>
+      <span class="logo-text">Hiro</span>
+    </div>
+    <nav class="site-nav">
+      <a href="../intro/" class="nav-link">Top</a>
+      <a href="./" class="nav-link active">Studies</a>
+      <a href="./origami/" class="nav-link">Origami App</a>
+      <a href="../contact/" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Simple hero (no video) -->
+    <section class="content-hero content-hero--simple">
+      <div class="hero-inner hero-inner--single">
+        <div class="hero-text">
+          <p class="hero-kicker">Studies • 3-year independent project</p>
+          <h1 class="hero-title">
+            Three years with <span class="hero-name">one-cut origami</span>.
+          </h1>
+          <p class="hero-desc">
+            This page is a written overview of what I learned, built, and tested
+            while exploring the mathematics of the “fold-and-cut” problem.
+            I started from paper experiments, moved to CAD-based precision,
+            and eventually implemented an app that generates crease patterns.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./origami/index.html">Explore the Origami App</a>
+            <a class="btn btn-ghost" href="#timeline">Jump to timeline</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">At a glance</h2>
+          <p class="card-text">
+            Theme: fold-and-cut / one straight cut • Geometry + algorithms + implementation.
+          </p>
+          <hr class="hr-soft" />
+          <div class="badges" aria-label="Topics">
+            <span class="badge">Computational geometry</span>
+            <span class="badge">Graph thinking</span>
+            <span class="badge">SVG</span>
+            <span class="badge">Python</span>
+            <span class="badge">UI prototyping</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Highlights</h2>
+        <p class="section-lead">
+          The project is one story told from three angles: the problem itself, what I built,
+          and what changed in how I think.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3 class="card-title">The question</h3>
+            <p class="card-text">
+              Given a polygon (or a set of polygons), can a single straight cut remove it
+              exactly after folding the paper?
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">The output</h3>
+            <p class="card-text">
+              Crease patterns (SVG) that I can test with real paper — and a small app that
+              generates them from polygon data.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">The learning</h3>
+            <p class="card-text">
+              Turning theory into something runnable taught me about edge cases, numerical
+              stability, and designing tools people can actually use.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section" id="timeline">
+      <div class="container">
+        <h2 class="section-title">Timeline</h2>
+        <p class="section-lead">
+          A simple year-by-year map. Each year had a different “main skill” I wanted to gain.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-tag">Year 1</div>
+            <div class="timeline-body">
+              <h3 class="card-title">Theory & paper experiments</h3>
+              <ul class="bullet-list">
+                <li>Learned the definition of the fold-and-cut problem.</li>
+                <li>Reproduced small examples by hand to understand why each fold exists.</li>
+                <li>Started drawing crease patterns for letters and symbols.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-tag">Year 2</div>
+            <div class="timeline-body">
+              <h3 class="card-title">Precision with CAD</h3>
+              <ul class="bullet-list">
+                <li>Used CAD to place crease lines accurately and compare constructions.</li>
+                <li>Connected “paper drawings” with algorithmic ideas (skeleton-like structure).</li>
+                <li>Noticed patterns become cleaner when based on angle bisectors / structure.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-tag">Year 3</div>
+            <div class="timeline-body">
+              <h3 class="card-title">Implementation (Origami App)</h3>
+              <ul class="bullet-list">
+                <li>Represented polygons/segments/vertices as objects (OOP).</li>
+                <li>Generated crease patterns as SVG output.</li>
+                <li>Built a small GUI so users can draw shapes and run the pipeline.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <article class="card card-wide" style="margin-top:18px;">
+          <h3 class="card-title">What I want to improve next</h3>
+          <p class="card-note">
+            Handle more general shapes, reduce fold count in real-world constraints, and
+            make the app easier for other people to experiment with.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills / tools -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Tools & skills I used</h2>
+        <p class="section-lead">
+          A compact list, grouped the way I think about building projects.
+        </p>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3 class="card-title">Math / CS</h3>
+            <div class="badges">
+              <span class="badge">Geometry</span>
+              <span class="badge">Angle bisectors</span>
+              <span class="badge">Graphs</span>
+              <span class="badge">Algorithm design</span>
+              <span class="badge">Edge cases</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Implementation</h3>
+            <div class="badges">
+              <span class="badge">Python</span>
+              <span class="badge">SVG</span>
+              <span class="badge">Data modeling</span>
+              <span class="badge">GUI prototyping</span>
+              <span class="badge">Readable code</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> Hiro</small>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

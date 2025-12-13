@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hiro - Introduction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+  <div class="bg-orbit"></div>
+
+  <header class="site-header">
+    <div class="site-logo">
+      <span class="logo-mark">HI</span>
+      <span class="logo-text">Hiro</span>
+    </div>
+    <nav class="site-nav">
+      <a href="./" class="nav-link active">Top</a>
+      <a href="../studies/" class="nav-link">Studies</a>
+      <a href="../studies/origami/" class="nav-link">Origami App</a>
+      <a href="../contact/" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Fullscreen hero with video background -->
+    <section class="content-hero">
+      <!-- video background layer -->
+      <div class="video-bg" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="../assets/videos/hero.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <!-- readability overlay -->
+      <div class="video-overlay" aria-hidden="true"></div>
+
+      <!-- foreground content -->
+      <div class="hero-inner hero-inner--split">
+        <div class="hero-text">
+          <p class="hero-kicker">Student • Math & Origami</p>
+          <h1 class="hero-title">
+            Hi, I'm <span class="hero-name">Hiro</span>.
+          </h1>
+          <p class="hero-desc">
+            Over the last three years, I have been working on a long-term project
+            about the mathematics of one-cut origami. I started from learning the
+            theory behind “one complete straight cut”, then moved on to designing
+            crease patterns, and finally built my own program to generate them
+            automatically. This site is a place to collect those studies and
+            experiments.
+          </p>
+          <div class="hero-actions">
+            <a href="../studies/index.html" class="btn btn-primary">See study overview</a>
+            <a href="../studies/origami/index.html" class="btn btn-ghost">Explore origami app</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img
+            src="../assets/images/KEIO-fold.png"
+            alt="One-cut origami crease pattern"
+            class="hero-image"
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> Hiro</small>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
