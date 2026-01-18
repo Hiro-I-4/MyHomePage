@@ -145,7 +145,7 @@ export class PenTool extends Tool {
   activate() {
     this.points = [];
     this.app.view.renderOverlayPreview(this.points, false);
-    this.app.setStatus('ペン: クリックで点を追加 / Enter=閉じる / Esc=開いた線として確定 / Backspace=戻る');
+    this.app.setStatus('Pen: click to add points / Enter=close / Esc=finish as polyline / Backspace=undo');
   }
 
   deactivate() {
@@ -200,7 +200,7 @@ export class PenTool extends Tool {
 
   _commitPolygon() {
     if (this.points.length < 3) {
-      this.app.showError('点が不足しています（最低3点）。');
+      this.app.showError('Not enough points (minimum 3).');
       return;
     }
     const shape = new PolylineShape(this.points, true);
@@ -212,7 +212,7 @@ export class PenTool extends Tool {
 
   _commitPolyline() {
     if (this.points.length < 2) {
-      this.app.showError('点が不足しています（最低2点）。');
+      this.app.showError('Not enough points (minimum 2).');
       return;
     }
     const shape = new PolylineShape(this.points, false);
@@ -230,7 +230,7 @@ export class RectTool extends Tool {
   }
 
   activate() {
-    this.app.setStatus('矩形: ドラッグで作成');
+    this.app.setStatus('Rectangle: drag to create');
   }
 
   onPointerDown(evt) {
@@ -259,7 +259,7 @@ export class RectTool extends Tool {
     this.app.view.clearOverlay();
 
     if (Math.abs(pts[2].x - pts[0].x) < 5 || Math.abs(pts[2].y - pts[0].y) < 5) {
-      this.app.showError('矩形が小さすぎます。');
+      this.app.showError('Rectangle is too small.');
       return;
     }
 
@@ -276,7 +276,7 @@ export class NgonTool extends Tool {
   }
 
   activate() {
-    this.app.setStatus('正多角形: ドラッグで作成（中心→半径）');
+    this.app.setStatus('Regular polygon: drag to create (center → radius)');
   }
 
   _getSides() {
@@ -313,7 +313,7 @@ export class NgonTool extends Tool {
 
     const r = Math.sqrt(dist2(this.state.center, this.state.current));
     if (r < 8) {
-      this.app.showError('正多角形が小さすぎます。');
+      this.app.showError('Regular polygon is too small.');
       return;
     }
     const pts = regularPolygonPoints(this.state.center, r, this._getSides());

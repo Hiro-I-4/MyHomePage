@@ -40,7 +40,7 @@ class StraightSkeletonService {
         const mod = await import('https://esm.sh/straight-skeleton@2.0.1');
         const api = mod.default ?? mod;
         if (!api.SkeletonBuilder) {
-          throw new Error('straight-skeleton の読み込みに失敗しました（SkeletonBuilder が見つかりません）。');
+          throw new Error('Failed to load straight-skeleton (SkeletonBuilder not found).');
         }
         await api.SkeletonBuilder.init();
         this._mod = api;
@@ -54,15 +54,15 @@ class StraightSkeletonService {
 function ringFromShape(shape) {
   // shape.points: [{x,y},...], closed polygon (no duplicate last)
   const pts = shape.points.map(p => pt(p.x, p.y));
-  if (pts.length < 3) throw new Error('閉じた図形は最低3点必要です。');
+  if (pts.length < 3) throw new Error('A closed shape needs at least 3 points.');
   // ensure no duplicate consecutive points
   const clean = [];
   for (const p of pts) {
     const prev = clean[clean.length - 1];
     if (!prev || (Math.abs(prev.x - p.x) > 1e-9 || Math.abs(prev.y - p.y) > 1e-9)) clean.push(p);
   }
-  if (clean.length < 3) throw new Error('閉じた図形は最低3点必要です。');
-  if (!isSimplePolygon(clean)) throw new Error('自己交差している図形は処理できません（単純多角形にしてください）。');
+  if (clean.length < 3) throw new Error('A closed shape needs at least 3 points.');
+  if (!isSimplePolygon(clean)) throw new Error('This shape is self-intersecting. Please use a simple polygon.');
   return clean;
 }
 
@@ -88,13 +88,13 @@ function buildRingsFromProject(project, selectedId = null) {
   // Collect closed polygons only
   const closed = project.shapes.filter(s => s.type === 'polygon' && s.closed && Array.isArray(s.points));
   if (closed.length === 0) {
-    throw new Error('閉じた図形がありません。ペン/矩形/正多角形で閉じた図形を作成してください。');
+    throw new Error('No closed polygon found. Create one using Pen/Rectangle/Regular Polygon.');
   }
 
   // If selected and it's a polygon, prioritize it as outer candidate
   const selected = selectedId ? project.getShapeById(selectedId) : null;
   if (selectedId && selected && !(selected.type === 'polygon' && selected.closed)) {
-    throw new Error('選択中の図形が閉じていないため処理できません（閉じた図形を選択してください）。');
+    throw new Error('The selected shape is not closed. Please select a closed polygon.');
   }
 
   // Convert to rings and compute areas
@@ -127,9 +127,9 @@ function buildRingsFromProject(project, selectedId = null) {
   if (outsiders.length > 0) {
     // Multiple disjoint polygons. In a full PSLG setting you could handle it, but this demo keeps it simple.
     throw new Error(
-      '外周候補が複数（分離した閉じ図形）検出されました。\n' +
-      'このデモは「外周1つ + 穴（内側の閉じ図形）」のみ対応です。\n' +
-      `外周の外にある図形数: ${outsiders.length}`
+      'Multiple outer candidates (disjoint closed polygons) were detected.\n' +
+      'This demo supports only: "one outer boundary + holes (inner closed polygons)".\n' +
+      `Number of polygons outside the outer boundary: ${outsiders.length}`
     );
   }
 
@@ -250,7 +250,7 @@ export class FoldAndCutEngine {
 
     const skeleton = api.SkeletonBuilder.buildFromPolygon(rings);
     if (!skeleton) {
-      throw new Error('Straight skeleton の生成に失敗しました（入力が weakly simple でない等の可能性）。');
+      throw new Error('Failed to generate a straight skeleton (the input may not be weakly simple, etc.).');
     }
 
     // 1) skeleton interior edges -> Mountain creases

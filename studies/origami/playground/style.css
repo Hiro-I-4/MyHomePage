@@ -170,7 +170,6 @@ body{
   .sidebar{border-right:none;border-bottom:1px solid var(--border)}
 }
 
-
 /* --- Force-hide overlays even if extensions/styles override [hidden] --- */
 #help[hidden],
 #helpOverlay[hidden],
