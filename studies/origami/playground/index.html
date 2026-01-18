@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>一刀切り Crease Explorer (Demo)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__title">
+      <div class="topbar__h1">一刀切り Crease Explorer</div>
+      <div class="topbar__sub">直線入力 → Straight Skeleton（WASM）→ オリセン(M/V)とキリセンを可視化</div>
+    </div>
+    <div class="topbar__right">
+      <a class="topbar__link" href="#" id="helpBtn">ヘルプ</a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <h2>ツール</h2>
+        <div class="toolbar">
+          <button class="tool" data-tool="select" id="toolSelect" title="選択・編集">選択</button>
+          <button class="tool" data-tool="pen" id="toolPen" title="直線で図形を描く（クリックで点、Enterで確定、Escで開いた線として確定）">ペン</button>
+          <button class="tool" data-tool="rect" id="toolRect" title="ドラッグで矩形">矩形</button>
+          <button class="tool" data-tool="ngon" id="toolNgon" title="ドラッグで正多角形">正多角形</button>
+        </div>
+
+        <div class="field">
+          <label>正多角形の辺数
+            <input type="number" id="ngonSides" min="3" max="40" step="1" value="6" />
+          </label>
+        </div>
+
+        <div class="row">
+          <button id="btnUndo" class="btn">Undo</button>
+          <button id="btnRedo" class="btn">Redo</button>
+          <button id="btnDelete" class="btn btn--danger">削除</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>グリッド</h2>
+        <div class="field">
+          <label><input type="checkbox" id="chkGrid" checked /> 表示</label>
+        </div>
+        <div class="field">
+          <label><input type="checkbox" id="chkSnap" checked /> スナップ</label>
+        </div>
+        <div class="field">
+          <label>間隔
+            <input type="number" id="gridSize" min="5" max="200" step="5" value="25" />
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Run</h2>
+        <div class="row">
+          <button id="btnRun" class="btn btn--primary">Run</button>
+          <button id="btnClearResult" class="btn">結果クリア</button>
+        </div>
+        <div class="hint">
+          ※ Run にはネット接続が必要です（Straight Skeleton を CDN から読み込み）。
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>保存・エクスポート</h2>
+        <div class="row">
+          <button id="btnSaveLocal" class="btn">ローカル保存</button>
+          <button id="btnLoadLocal" class="btn">ローカル読込</button>
+        </div>
+        <div class="row">
+          <button id="btnExportProject" class="btn">プロジェクトJSON</button>
+          <button id="btnImportProject" class="btn">インポート</button>
+          <input type="file" id="fileImport" accept="application/json" hidden />
+        </div>
+        <div class="row">
+          <button id="btnExportSVG" class="btn">SVG出力</button>
+          <button id="btnExportPattern" class="btn">結果JSON</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>情報</h2>
+        <div id="status" class="status">初期化中…</div>
+        <div id="error" class="error" hidden></div>
+        <div class="legend">
+          <div class="legend__item"><span class="sw sw--m"></span> 山折 (M)</div>
+          <div class="legend__item"><span class="sw sw--v"></span> 谷折 (V)</div>
+          <div class="legend__item"><span class="sw sw--c"></span> キリセン（1回切り）</div>
+          <div class="legend__item"><span class="sw sw--shape"></span> 入力図形</div>
+        </div>
+      </section>
+    </aside>
+
+    <section class="canvasWrap">
+      <svg id="canvas" class="canvas" viewBox="0 0 1000 700" tabindex="0" aria-label="drawing canvas">
+        <defs>
+          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.2" />
+          </filter>
+        </defs>
+        <g id="grid"></g>
+        <g id="shapes"></g>
+        <g id="result"></g>
+        <g id="handles"></g>
+        <g id="overlay"></g>
+      </svg>
+
+      <div class="help" id="help" hidden>
+        <div class="help__card">
+          <h3>使い方</h3>
+          <ul>
+            <li><b>ペン</b>: クリックで点を追加。<b>Enter</b>で閉じた多角形として確定。<b>Esc</b>で開いた折れ線として確定。</li>
+            <li><b>矩形/正多角形</b>: ドラッグで作成。</li>
+            <li><b>選択</b>: 図形クリックで選択。頂点ドラッグで編集。図形内部ドラッグで移動。</li>
+            <li><b>Run</b>: 選択中の閉じた図形（複数ある場合は“外周＋穴”を自動推定）から Straight Skeleton を計算し、
+              デモ用のオリセン(M/V)とキリセンを描画します。</li>
+          </ul>
+          <p class="help__note">
+            注意: これは「一刀切り」を体験するための学習用デモです。
+            Demaine らの完全な fold-and-cut 構成の全手順（反射での最終重ね合わせ等）までを厳密に再現するものではありません。
+            ただし、直線骨格（straight skeleton）に基づく折り線生成の雰囲気は確認できます。
+          </p>
+          <div class="row">
+            <button class="btn btn--primary" id="helpClose">閉じる</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

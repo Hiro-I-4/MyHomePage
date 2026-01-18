@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Paper 3 — Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../../assets/css/site.css" />
+
+  <style>
+    .paper-meta { margin-top: 10px; color: rgba(203, 213, 245, 0.95); line-height: 1.7; }
+    .paper-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+    .pdf-frame {
+      width: 100%;
+      height: min(78vh, 920px);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 18px;
+      background: rgba(2, 6, 23, 0.35);
+    }
+    .callout {
+      background: rgba(2, 6, 23, 0.35);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-radius: 16px;
+      padding: 14px 14px;
+      margin-top: 12px;
+      color: rgba(229, 240, 255, 0.92);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orbit"></div>
+
+  <header class="site-header">
+    <div class="site-logo">
+      <span class="logo-mark">HI</span>
+      <span class="logo-text">Hiro</span>
+    </div>
+    <nav class="site-nav">
+      <a href="../../intro/" class="nav-link">Top</a>
+      <a href="../" class="nav-link">Studies</a>
+      <a href="../origami/" class="nav-link">Origami App</a>
+      <a href="./" class="nav-link active">Papers</a>
+      <a href="../../contact/" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="content-hero content-hero--simple">
+      <div class="hero-inner hero-inner--single">
+        <div class="hero-text">
+          <p class="hero-kicker">Paper</p>
+          <h1 class="hero-title"><span class="hero-name">Paper 3 title goes here</span></h1>
+
+          <div class="paper-meta">
+            <div><strong>Authors:</strong> Hiro ...</div>
+            <div><strong>Venue:</strong> Journal / Conference</div>
+            <div><strong>Year:</strong> 2023</div>
+            <div><strong>DOI:</strong> (optional)</div>
+          </div>
+
+          <div class="paper-actions">
+            <a class="btn btn-ghost" href="./">Back to Papers</a>
+            <a class="btn btn-primary" href="../../assets/papers/paper-3.pdf" target="_blank" rel="noopener">Open PDF</a>
+            <a class="btn btn-ghost" href="../../assets/papers/paper-3.pdf" download>Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">One-line takeaway</h2>
+          <p class="card-text">Write the strongest takeaway in one sentence.</p>
+          <hr class="hr-soft" />
+          <div class="badges">
+            <span class="badge">Keyword 1</span>
+            <span class="badge">Keyword 2</span>
+            <span class="badge">Keyword 3</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid-2">
+          <article class="card">
+            <h3 class="card-title">Abstract (short)</h3>
+            <p class="card-note">
+              Paste a short abstract (5–10 lines) here. Keep it readable.
+            </p>
+            <div class="callout">
+              <strong>Clinical/technical context:</strong><br />
+              1–2 lines about why this matters.
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Highlights</h3>
+            <ul class="bullet-list">
+              <li><strong>Design:</strong> (e.g., retrospective / prospective / methods)</li>
+              <li><strong>Population/Data:</strong> (n=?, key inclusion)</li>
+              <li><strong>Key result:</strong> (numbers if you want)</li>
+              <li><strong>Implication:</strong> what changes in practice</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="card card-wide">
+          <h3 class="card-title">Read the paper</h3>
+          <p class="card-note">
+            If embedded PDF doesn’t show on some browsers, use “Open PDF”.
+          </p>
+
+          <iframe
+            class="pdf-frame"
+            src="../../assets/papers/paper-3.pdf#view=FitH"
+            title="Paper 3 PDF">
+          </iframe>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> Hiro</small>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,539 +1,922 @@
 /* assets/css/site.css */
 
-/* === Global reset & base === */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --bg-dark: #02091b;
-  --accent-main: #38bdf8;
-  --accent-deep: #1d4ed8;
-  --accent-soft: #dbeafe;
-  --text-main: #e5f0ff;
-  --text-muted: #cbd5f5;
-  --card-bg: rgba(15, 23, 42, 0.88);
-  --border-subtle: rgba(56, 189, 248, 0.35);
-  --shadow-soft: 0 18px 36px rgba(15, 23, 42, 0.9);
-}
-
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Yu Gothic", "YuGothic", sans-serif;
-  color: var(--text-main);
-  background:
-    radial-gradient(circle at top left, #1d4ed8 0, transparent 45%) fixed,
-    radial-gradient(circle at bottom right, #0ea5e9 0, transparent 55%) fixed,
-    #02091b;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Soft abstract shapes */
-.bg-orbit {
-  position: fixed;
-  inset: -20%;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.35), transparent 55%),
-    radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.25), transparent 55%),
-    radial-gradient(circle at 90% 80%, rgba(148, 163, 184, 0.12), transparent 60%);
-  filter: blur(4px);
-  z-index: -2;
-}
-
-/* === Header / navigation === */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  backdrop-filter: blur(18px);
-  background: linear-gradient(
-    to right,
-    rgba(15, 23, 42, 0.9),
-    rgba(15, 23, 42, 0.85)
-  );
-  border-bottom: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 10px 6vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.site-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-mark {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 20%, #e0f2fe, #1d4ed8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #0b1120;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
-}
-
-.logo-text {
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.nav-link {
-  font-size: 0.85rem;
-  text-decoration: none;
-  color: var(--text-muted);
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  transition: all 0.18s ease;
-}
-
-.nav-link:hover {
-  color: #e5f0ff;
-  border-color: rgba(56, 189, 248, 0.7);
-  background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent);
-}
-
-.nav-link.active {
-  color: #0b1120;
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  border-color: transparent;
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
-}
-
-/* === Hero (video or simple) === */
-.content-hero {
+/* =========================
+   00) Reset + Tokens
+   ========================= */
+   *,
+   *::before,
+   *::after { box-sizing: border-box; margin: 0; padding: 0; }
+   
+   :root{
+     --bg-dark:#02091b;
+     --accent-main:#38bdf8;
+     --accent-deep:#1d4ed8;
+     --accent-soft:#dbeafe;
+     --text-main:#e5f0ff;
+     --text-muted:#cbd5f5;
+     --card-bg:rgba(15,23,42,.88);
+     --border-subtle:rgba(56,189,248,.35);
+     --shadow-soft:0 18px 36px rgba(15,23,42,.9);
+   }
+   
+   body{
+     font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic","YuGothic",sans-serif;
+     color:var(--text-main);
+     background:
+       radial-gradient(circle at top left,#1d4ed8 0,transparent 45%) fixed,
+       radial-gradient(circle at bottom right,#0ea5e9 0,transparent 55%) fixed,
+       #02091b;
+     min-height:100vh;
+     overflow-x:hidden;
+   }
+   
+   .bg-orbit{
+     position:fixed;
+     inset:-20%;
+     background:
+       radial-gradient(circle at 10% 20%,rgba(59,130,246,.35),transparent 55%),
+       radial-gradient(circle at 80% 0,rgba(56,189,248,.25),transparent 55%),
+       radial-gradient(circle at 90% 80%,rgba(148,163,184,.12),transparent 60%);
+     filter:blur(4px);
+     z-index:-2;
+   }
+   
+   /* =========================
+      01) Header / Nav
+      ========================= */
+   .site-header{
+     position:sticky; top:0; z-index:30;
+     backdrop-filter:blur(18px);
+     background:linear-gradient(to right,rgba(15,23,42,.9),rgba(15,23,42,.85));
+     border-bottom:1px solid rgba(56,189,248,.3);
+     padding:10px 6vw;
+     display:flex; align-items:center; justify-content:space-between;
+   }
+   
+   .site-logo{ display:flex; align-items:center; gap:10px; }
+   
+   .logo-mark{
+     width:30px; height:30px; border-radius:999px;
+     background:radial-gradient(circle at 30% 20%,#e0f2fe,#1d4ed8);
+     display:flex; align-items:center; justify-content:center;
+     font-size:.8rem; font-weight:700;
+     color:#0b1120;
+     box-shadow:0 0 14px rgba(56,189,248,.7);
+   }
+   
+   .logo-text{ font-size:.95rem; font-weight:600; letter-spacing:.04em; }
+   
+   .site-nav{ display:flex; flex-wrap:wrap; gap:10px; }
+   
+   .nav-link{
+     font-size:.85rem;
+     text-decoration:none;
+     color:var(--text-muted);
+     padding:6px 12px;
+     border-radius:999px;
+     border:1px solid transparent;
+     transition:all .18s ease;
+   }
+   
+   .nav-link:hover{
+     color:#e5f0ff;
+     border-color:rgba(56,189,248,.7);
+     background:radial-gradient(circle at 0 0,rgba(56,189,248,.18),transparent);
+   }
+   
+   .nav-link.active{
+     color:#0b1120;
+     background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+     box-shadow:0 0 18px rgba(56,189,248,.5);
+   }
+   
+   /* =========================
+      02) Hero (Video)
+      ========================= */
+   .content-hero{
+     position:relative;
+     min-height:100vh;
+     display:flex;
+     align-items:center;
+     padding:72px 6vw 48px;
+     overflow:hidden;
+   }
+   
+   /* ここを “背景動画フルスクリーン” から “比率固定のフレーム” に変更 */
+   .content-hero--video{
+     min-height:calc(100vh - 64px);
+     padding:84px 6vw 56px;
+     align-items:center;
+     justify-content:center;
+   }
+   
+   /* 互換 */
+   .content.content-hero{
+     position:relative;
+     min-height:100vh;
+     display:flex;
+     align-items:center;
+     padding:72px 6vw 48px;
+     overflow:hidden;
+   }
+   
+   .content-hero--simple{ min-height:62vh; }
+   
+   /* NEW: video frame (1.85:1) */
+   .hero-video-frame{
+     position:relative;
+     width:min(92vw, 1200px);
+     aspect-ratio: 1.85 / 1;
+     border-radius:22px;
+     overflow:hidden;
+     background:rgba(2,6,23,.45);
+     border:1px solid rgba(56,189,248,.26);
+     box-shadow:
+       0 34px 78px rgba(0,0,0,.55),
+       0 0 0 1px rgba(15,23,42,.92) inset;
+   }
+   
+   /* aspect-ratio 非対応の古いブラウザ用フォールバック */
+   @supports not (aspect-ratio: 1 / 1){
+     .hero-video-frame{
+       height:auto;
+     }
+     .hero-video-frame::before{
+       content:"";
+       display:block;
+       padding-top: calc(100% / 1.85); /* = 54.05% */
+     }
+     .hero-video-frame > *{
+       position:absolute;
+       inset:0;
+     }
+   }
+   
+   .video-bg{
+     position:absolute; inset:0; z-index:0;
+     opacity:1;
+     transform:scale(1.02);
+   }
+   
+   .video-bg video{
+     width:100%; height:100%;
+     object-fit:cover;
+     object-position:center;
+   
+     /* 主張を落とす（少し暗く＋彩度/コントラスト控えめ） */
+     filter:contrast(1.06) saturate(1.02) brightness(.90);
+   }
+   
+   /* ここが“シャドー”本体：ビネット＋内側の影＋上から少し暗い */
+   .video-overlay{
+     position:absolute; inset:0; z-index:1;
+   
+     background:
+       radial-gradient(circle at 50% 50%,
+         rgba(0,0,0,0) 40%,
+         rgba(0,0,0,.45) 100%
+       ),
+       linear-gradient(to bottom,
+         rgba(2,6,23,.22),
+         rgba(2,6,23,.52)
+       );
+   
+     /* 内側の影（フチを締める） */
+     box-shadow: inset 0 0 90px rgba(0,0,0,.55);
+   }
+   
+   .hero-overlay-ui{
+     position:relative; z-index:2;
+     width:100%;
+     min-height:100%;
+     display:grid; place-items:center;
+     padding:26px 26px 22px;
+     pointer-events:none;
+   }
+   
+   .hero-caption{
+     pointer-events:auto;
+     padding:14px 18px;
+     border-radius:18px;
+     background:rgba(2,6,23,.30);
+     border:1px solid rgba(255,255,255,.18);
+     backdrop-filter:blur(10px);
+     box-shadow:0 18px 36px rgba(0,0,0,.28);
+     max-width:min(92vw,900px);
+     text-align:center;
+   }
+   
+   .hero-title--minimal{ margin:0; text-shadow:0 10px 24px rgba(0,0,0,.35); }
+   
+   .video-control{
+     pointer-events:auto;
+     position:absolute; right:16px; bottom:16px;
+     display:inline-flex; align-items:center; gap:10px;
+     padding:10px 14px;
+     border-radius:999px;
+     background:rgba(2,6,23,.58);
+     border:1px solid rgba(255,255,255,.22);
+     color:#e5f0ff;
+     backdrop-filter:blur(10px);
+     cursor:pointer;
+     transition:transform .16s ease, background .16s ease, border-color .16s ease;
+   }
+   .video-control:hover{
+     transform:translateY(-1px);
+     background:rgba(2,6,23,.72);
+     border-color:rgba(56,189,248,.55);
+   }
+   .video-control__icon{ font-size:.95rem; line-height:1; }
+   .video-control__text{ font-size:.9rem; }
+   
+   /* =========================
+      03) Hero content + Buttons
+      ========================= */
+   .hero-inner{ max-width:1080px; margin:0 auto; width:100%; }
+   
+   .hero-inner--split{
+     position:relative; z-index:2;
+     display:grid;
+     grid-template-columns:minmax(0,3fr) minmax(0,2.4fr);
+     gap:32px;
+     align-items:center;
+   }
+   
+   /* 互換 */
+   .hero-inner--fullscreen{
+     position:relative; z-index:2;
+     display:grid;
+     grid-template-columns:minmax(0,3fr) minmax(0,2.4fr);
+     gap:32px;
+     align-items:center;
+   }
+   
+   .hero-inner--single{
+     position:relative; z-index:2;
+     display:grid;
+     grid-template-columns:minmax(0,1fr);
+     gap:18px;
+   }
+   
+   .hero-text{ max-width:680px; }
+   
+   .hero-kicker{
+     font-size:.85rem;
+     letter-spacing:.12em;
+     text-transform:uppercase;
+     color:rgba(229,240,255,.85);
+     margin-bottom:10px;
+   }
+   
+   .hero-title{
+     font-size:clamp(2rem,3.2vw + 1rem,2.9rem);
+     line-height:1.15;
+     margin-bottom:14px;
+     text-shadow:0 8px 22px rgba(0,0,0,.35);
+   }
+   
+   .hero-name{
+     background:linear-gradient(135deg,#dbeafe,#38bdf8,#0ea5e9);
+     -webkit-background-clip:text;
+     background-clip:text;
+     color:transparent;
+   }
+   
+   .hero-desc{
+     font-size:1rem;
+     line-height:1.65;
+     color:rgba(249,251,255,.95);
+     max-width:44rem;
+     text-shadow:0 10px 24px rgba(0,0,0,.35);
+   }
+   
+   .hero-actions{
+     display:flex;
+     flex-wrap:wrap;
+     gap:12px;
+     margin-top:20px;
+   }
+   
+   .btn{
+     display:inline-flex;
+     align-items:center;
+     justify-content:center;
+     padding:9px 18px;
+     border-radius:999px;
+     font-size:.9rem;
+     font-weight:500;
+     text-decoration:none;
+     cursor:pointer;
+     border:1px solid transparent;
+     transition:
+       transform .16s ease,
+       box-shadow .16s ease,
+       background .16s ease,
+       border-color .16s ease,
+       color .16s ease;
+   }
+   
+   .btn-primary{
+     background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+     color:#0b1120;
+     box-shadow:0 8px 20px rgba(56,189,248,.6);
+   }
+   .btn-primary:hover{
+     transform:translateY(-1px);
+     box-shadow:0 12px 30px rgba(56,189,248,.8);
+   }
+   
+   .btn-ghost{
+     background:rgba(15,23,42,.75);
+     border-color:rgba(56,189,248,.55);
+     color:#e5f0ff;
+     backdrop-filter:blur(10px);
+   }
+   .btn-ghost:hover{ background:rgba(15,23,42,.9); }
+   
+   .hero-visual{ display:flex; justify-content:center; align-items:center; }
+   .hero-image{
+     max-width:100%;
+     border-radius:18px;
+     border:1px solid rgba(148,163,184,.55);
+     box-shadow:
+       0 18px 36px rgba(15,23,42,.9),
+       0 0 0 1px rgba(15,23,42,.95) inset;
+     background:rgba(2,6,23,.35);
+     backdrop-filter:blur(10px);
+   }
+   
+   /* =========================
+      04) Layout / Sections
+      ========================= */
+   .section{ padding:56px 6vw; }
+   .container{ max-width:1080px; margin:0 auto; }
+   
+   .section-title{ font-size:1.35rem; letter-spacing:.02em; margin-bottom:14px; }
+   .section-lead{
+     color:rgba(229,240,255,.9);
+     line-height:1.75;
+     margin-bottom:22px;
+     max-width:52rem;
+   }
+   
+   .grid-2{
+     display:grid;
+     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+     gap:18px;
+   }
+   .grid-3{
+     display:grid;
+     grid-template-columns:repeat(3,minmax(0,1fr));
+     gap:18px;
+   }
+   
+   /* =========================
+      05) Components
+      ========================= */
+   .card{
+     background:var(--card-bg);
+     border:1px solid rgba(56,189,248,.22);
+     border-radius:18px;
+     box-shadow:var(--shadow-soft);
+     padding:18px 18px;
+     backdrop-filter:blur(14px);
+   }
+   .card-title{ font-size:1.02rem; margin-bottom:10px; }
+   .card-text{ color:rgba(229,240,255,.9); line-height:1.75; }
+   .card-note{ color:rgba(203,213,245,.95); line-height:1.75; }
+   .card-wide{ margin-top:18px; }
+   
+   .hr-soft{
+     height:1px; border:0;
+     background:linear-gradient(to right,transparent,rgba(56,189,248,.35),transparent);
+     margin:18px 0;
+   }
+   
+   .bullet-list{
+     margin-top:10px;
+     padding-left:18px;
+     display:grid;
+     gap:8px;
+   }
+   .bullet-list li{ line-height:1.65; color:rgba(229,240,255,.92); }
+   
+   code{
+     font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+     font-size:.92em;
+     color:#e0f2fe;
+     background:rgba(2,6,23,.55);
+     border:1px solid rgba(56,189,248,.22);
+     padding:.12em .4em;
+     border-radius:8px;
+   }
+   
+   .badges{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+   .badge{
+     display:inline-flex; align-items:center;
+     padding:7px 12px;
+     border-radius:999px;
+     font-size:.85rem;
+     color:rgba(229,240,255,.95);
+     background:rgba(15,23,42,.68);
+     border:1px solid rgba(56,189,248,.35);
+   }
+   
+   /* Timeline */
+   .timeline{ display:grid; gap:14px; margin-top:10px; }
+   .timeline-item{
+     display:grid;
+     grid-template-columns:84px minmax(0,1fr);
+     gap:14px;
+     align-items:start;
+   }
+   .timeline-tag{
+     height:fit-content;
+     padding:8px 12px;
+     border-radius:999px;
+     font-size:.82rem;
+     color:#0b1120;
+     background:linear-gradient(135deg,#dbeafe,#38bdf8);
+   }
+   .timeline-body{
+     background:rgba(2,6,23,.35);
+     border:1px solid rgba(56,189,248,.18);
+     border-radius:16px;
+     padding:14px 14px;
+   }
+   
+   /* Forms */
+   .form{ display:grid; gap:12px; margin-top:12px; }
+   .input,.textarea{
+     width:100%;
+     padding:10px 12px;
+     border-radius:14px;
+     background:rgba(2,6,23,.45);
+     border:1px solid rgba(56,189,248,.24);
+     color:var(--text-main);
+     outline:none;
+   }
+   .input:focus,.textarea:focus{
+     border-color:rgba(56,189,248,.55);
+     box-shadow:0 0 0 4px rgba(56,189,248,.12);
+   }
+   .textarea{ min-height:140px; resize:vertical; }
+   .mini-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+   
+   /* Footer */
+   .site-footer{
+     padding:16px 0 26px;
+     text-align:center;
+     font-size:.8rem;
+     color:#e5e7eb;
+     opacity:.9;
+   }
+   
+   /* =========================
+      Click-to-swap deck (PowerPoint-ish) — v1 (旧: swap-item)
+      ========================= */
+   .swap-deck {
+     position: relative;
+     cursor: pointer;
+     outline: none;
+   }
+   
+   
+   
+   /* 旧モード: 複数 .swap-item を重ねる */
+   .swap-item {
+     position: absolute;
+     inset: 0;
+     opacity: 0;
+     transform: translateX(24px);
+     pointer-events: none;
+   
+     transition: opacity 360ms ease, transform 360ms ease;
+   }
+   
+   .swap-item.is-active {
+     position: relative;
+     opacity: 1;
+     transform: none;
+     pointer-events: auto;
+   }
+   
+   /* leaving: slide out left */
+   .swap-item.is-leaving {
+     opacity: 0;
+     transform: translateX(-24px);
+     pointer-events: none;
+   }
+   
+   /* entering: start slightly right */
+   .swap-item.is-entering {
+     opacity: 0;
+     transform: translateX(24px);
+   }
+  
+   
+   /* =========================
+      Click-to-swap deck — v2 (新: single card rebuild)
+      常に画面にカード1枚。中身は template から再構築。
+      ========================= */
+   .swap-deck.swap-deck--single{
+     position: relative;
+   }
+   
+   .swap-deck.swap-deck--single template{ display:none; }
+   
+   /* 1枚しかないカード本体 */
+   .swap-deck.swap-deck--single .swap-card{
+     transition: opacity 360ms ease, transform 360ms ease;
+     will-change: opacity, transform;
+   }
+   
+   /* leave -> left */
+   .swap-deck.swap-deck--single .swap-card.is-leaving{
+     opacity: 0;
+     transform: translateX(-24px);
+   }
+   
+   /* enter -> from right */
+   .swap-deck.swap-deck--single .swap-card.is-entering{
+     opacity: 0;
+     transform: translateX(24px);
+   }
+   
+   @media (prefers-reduced-motion: reduce){
+     .swap-item{ transition:none !important; transform:none !important; }
+     .swap-deck.swap-deck--single .swap-card{ transition:none !important; transform:none !important; }
+   }
+   
+   /* =========================
+      Origami split & re-layout (units)
+      ========================= */
+   .unit-stage{
+     position: relative;
+     display: grid;
+     gap: 18px;
+   }
+   
+   .unit{
+     will-change: transform;
+     transform: translateZ(0);
+   }
+   
+   /* 分割して浮く感じ（演出） */
+   .unit-stage.is-splitting .unit{
+     transition: transform 520ms cubic-bezier(.22,1,.36,1);
+   }
+   
+   /* ふわっと紙っぽいハイライト（任意） */
+   .unit-stage .unit{
+     position: relative;
+   }
+   .unit-stage .unit::after{
+     content:"";
+     position:absolute;
+     inset:0;
+     pointer-events:none;
+     border-radius:18px;
+     opacity:0;
+     background: linear-gradient(135deg, rgba(219,234,254,0.18), transparent 45%);
+     transition: opacity 240ms ease;
+   }
+   .unit-stage.is-splitting .unit::after{
+     opacity:1;
+   }
+   
+   /* reduced motion */
+   @media (prefers-reduced-motion: reduce){
+     .unit-stage.is-splitting .unit{ transition: none !important; }
+   }
+   
+   /* =========================
+      以下は既存のまま残している legacy セクション
+      ========================= */
+   
+   /* =========================
+      06) Fold (legacy) + Flip (legacy)
+      ========================= */
+   .fold-stage{ position:relative; perspective:1400px; overflow:visible; }
+   .fold-paper{
+     position:relative;
+     transform-style:preserve-3d;
+     transform-origin:top center;
+     transition:transform 1.2s cubic-bezier(.22,1,.36,1);
+   }
+   .fold-face{
+     transform-style:preserve-3d;
+     transition:transform 1.2s cubic-bezier(.22,1,.36,1), opacity .9s ease;
+     will-change:transform, opacity;
+   }
+   .fold-face--front{ transform-origin:top center; }
+   .fold-face--back{ transform-origin:bottom center; }
+   
+   .fold-stage[data-fold="0"] .fold-paper{ transform:translateY(22px) rotateX(28deg) scale(.98); }
+   .fold-stage[data-fold="0"] .fold-face{ opacity:0; }
+   .fold-stage[data-fold="1"] .fold-paper{ transform:translateY(0) scale(1); }
+   .fold-stage[data-fold="1"] .fold-face--front{ opacity:1; transform:rotateX(-18deg); }
+   .fold-stage[data-fold="2"] .fold-face--front{ transform:rotateX(-6deg); }
+   .fold-stage[data-fold="2"] .fold-face--back{ opacity:1; transform:rotateX(14deg); }
+   .fold-stage[data-fold="3"] .fold-paper{ transform:none; }
+   .fold-stage[data-fold="3"] .fold-face{ opacity:1; transform:none; }
+   
+   .fold-paper::before{
+     content:"";
+     position:absolute; inset:0;
+     pointer-events:none;
+     background:linear-gradient(to bottom,rgba(255,255,255,.08),transparent 35%,transparent 65%,rgba(0,0,0,.18));
+     opacity:0;
+     transition:opacity .8s ease;
+   }
+   .fold-stage[data-fold="2"] .fold-paper::before,
+   .fold-stage[data-fold="3"] .fold-paper::before{ opacity:1; }
+   
+   /* Flip */
+   .flip-stage{ perspective:1600px; cursor:pointer; }
+   .flip-page{ position:relative; transform-style:preserve-3d; transition:transform 1.2s cubic-bezier(.22,1,.36,1); }
+   .flip-face{ backface-visibility:hidden; }
+   .flip-face--back{ position:absolute; inset:0; transform:rotateY(180deg); }
+   .flip-stage[data-state="back"] .flip-page{ transform:rotateY(180deg); }
+   
+   /* =========================
+      Accordion (蛇腹) — v4 (NO SHADOW)
+      ========================= */
+   .accordion-stage { --acc: 0; }
+   
+   .accordion-paper{
+     position: relative;
+     border-radius: 18px;
+     overflow: hidden;
+   }
+   
+   .accordion-mask{
+     position: relative;
+     overflow: hidden;
+     border-radius: 18px;
+     clip-path: inset(0 0 calc((1 - var(--acc)) * 86%) 0 round 18px);
+   }
+   
+   .accordion-surface{
+     position: relative;
+     border-radius: 18px;
+   
+     background:
+       linear-gradient(180deg,
+         rgba(56, 189, 248, 0.10),
+         rgba(29, 78, 216, 0.14)
+       ),
+       rgba(2, 6, 23, 0.88);
+   
+     border: 1px solid rgba(56, 189, 248, 0.34);
+     box-shadow: none;
+   
+     padding: 18px 18px;
+     backdrop-filter: blur(8px);
+   
+     transform-style: preserve-3d;
+     transform-origin: top center;
+   
+     transform:
+       rotateX(calc((1 - var(--acc)) * 68deg))
+       translateY(calc((1 - var(--acc)) * -14px));
+   
+     filter: none;
+   }
+   
+   .accordion-content{
+     position: relative;
+     transform-origin: top center;
+     transform: scaleY(calc(0.55 + (var(--acc) * 0.45)));
+     filter: none;
+   }
+   
+   .accordion-content .hero-title,
+   .accordion-content .hero-desc,
+   .accordion-content .section-title{
+     text-shadow: none !important;
+   }
+   
+   .accordion-content .btn-primary{
+     box-shadow: none !important;
+   }
+   .accordion-content .btn-primary:hover{
+     box-shadow: none !important;
+   }
+   
+   .accordion-content::before{
+     content:"";
+     position:absolute;
+     inset:-18px;
+     pointer-events:none;
+     border-radius:18px;
+     z-index:0;
+   
+     background:
+       repeating-linear-gradient(
+         to bottom,
+         rgba(219, 234, 254, 0.22) 0px,
+         rgba(219, 234, 254, 0.22) 1px,
+         transparent 6px,
+         transparent 11px,
+         rgba(30, 64, 175, 0.36) 12px,
+         rgba(30, 64, 175, 0.36) 13px,
+         transparent 14px
+       );
+   
+     background-position: 0 calc(var(--acc) * 14px);
+     opacity: calc(0.62 - (var(--acc) * 0.14));
+     transition: opacity 160ms ease;
+   }
+   
+   .accordion-content > *{
+     position: relative;
+     z-index: 1;
+   }
+   
+   .accordion-surface::after{
+     content:"";
+     position:absolute;
+     inset:-12% 0;
+     pointer-events:none;
+     border-radius:18px;
+   
+     opacity: 0;
+     background: linear-gradient(
+       to bottom,
+       transparent 30%,
+       rgba(219, 234, 254, 0.18) 45%,
+       transparent 60%
+     );
+     transform: translateY(-18%);
+   }
+   
+   .accordion-stage.is-unfolding .accordion-surface::after{
+     animation: accordionCreaseSweep 780ms ease both;
+   }
+   
+   @keyframes accordionCreaseSweep{
+     0%{ opacity:0; transform:translateY(-20%); }
+     20%{ opacity:0.85; }
+     100%{ opacity:0; transform:translateY(18%); }
+   }
+   
+   @media (prefers-reduced-motion: reduce){
+     .accordion-mask{ clip-path: inset(0 round 18px) !important; }
+     .accordion-surface{ transform:none !important; }
+     .accordion-content{ transform:none !important; }
+     .accordion-content::before{ opacity:0.25 !important; }
+     .accordion-surface::after{ animation:none !important; opacity:0 !important; }
+   }
+   
+   /* =========================
+      Timeline Origami: split → rearrange → regroup (single card)
+      ========================= */
+   .origami-timeline { position: relative; }
+   
+   .origami-card {
+     position: relative;
+     user-select: none;
+     cursor: pointer;
+     outline: none;
+   }
+   
+   .origami-card::after{
+     content: "Click to continue";
+     position: absolute;
+     right: 12px;
+     bottom: 10px;
+     font-size: 0.78rem;
+     color: rgba(229,240,255,0.78);
+     background: rgba(2,6,23,0.42);
+     border: 1px solid rgba(56,189,248,0.22);
+     padding: 6px 10px;
+     border-radius: 999px;
+     backdrop-filter: blur(8px);
+     pointer-events: none;
+   }
+   
+   .origami-card:active { transform: translateY(1px); }
+   
+   .origami-pieces{
+     position: absolute;
+     inset: 0;
+     pointer-events: none;
+     border-radius: 18px;
+     overflow: hidden;
+     z-index: 3;
+   }
+   
+   .origami-piece{
+     position: absolute;
+     inset: 0;
+     opacity: 0;
+   
+     background:
+       linear-gradient(180deg,
+         rgba(56, 189, 248, 0.10),
+         rgba(29, 78, 216, 0.14)
+       ),
+       rgba(2, 6, 23, 0.88);
+   
+     border: 1px solid rgba(56,189,248,0.20);
+     box-shadow: none;
+   }
+   
+   .origami-piece.p1 { clip-path: polygon(0% 0%, 16.7% 0%, 16.7% 100%, 0% 100%); }
+   .origami-piece.p2 { clip-path: polygon(16.7% 0%, 33.4% 0%, 33.4% 100%, 16.7% 100%); }
+   .origami-piece.p3 { clip-path: polygon(33.4% 0%, 50.1% 0%, 50.1% 100%, 33.4% 100%); }
+   .origami-piece.p4 { clip-path: polygon(50.1% 0%, 66.8% 0%, 66.8% 100%, 50.1% 100%); }
+   .origami-piece.p5 { clip-path: polygon(66.8% 0%, 83.5% 0%, 83.5% 100%, 66.8% 100%); }
+   .origami-piece.p6 { clip-path: polygon(83.5% 0%, 100% 0%, 100% 100%, 83.5% 100%); }
+   
+   .origami-content { position: relative; z-index: 2; }
+   
+   @media (prefers-reduced-motion: reduce){
+     .origami-card::after{ content: ""; }
+   }
+   /* === Single-card rebuild deck: left-bottom outside button + progress === */
+.swap-deck.swap-deck--single{
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 72px 6vw 48px;
-  overflow: hidden;
+  perspective: 1200px;
+  padding-bottom: 44px; /* ボタンを枠外に出す余白 */
 }
 
-/* --- 互換 alias（旧トップの .content.content-hero を救う） --- */
-.content.content-hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 72px 6vw 48px;
-  overflow: hidden;
+.swap-deck.swap-deck--single template{ display:none; }
+
+.swap-deck.swap-deck--single .swap-card{
+  transform-style: preserve-3d;
+  transition: opacity 360ms ease, transform 360ms ease;
+  will-change: opacity, transform;
 }
 
-.content-hero--simple {
-  min-height: 62vh;
+.swap-deck.swap-deck--single .swap-card.is-leaving{
+  opacity: 0;
+  transform: translateX(-24px) rotateY(-7deg);
 }
 
-/* video layer */
-.video-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 1.0;
-  transform: scale(1.02);
+.swap-deck.swap-deck--single .swap-card.is-entering{
+  opacity: 0;
+  transform: translateX(24px) rotateY(7deg);
 }
 
-.video-bg video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(1.05) contrast(1.05);
-}
+/* 左下・枠外のボタン */
+.swap-advance{
+  position:absolute;
+  left: 10px;
+  bottom: 10px;
+  transform: translateY(100%); /* 枠外へ */
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
 
-.video-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(15, 23, 42, 0.45), transparent 55%),
-    radial-gradient(circle at 80% 20%, rgba(2, 6, 23, 0.40), transparent 60%),
-    linear-gradient(to bottom, rgba(2, 6, 23, 0.50), rgba(2, 6, 23, 0.70));
-}
-
-/* foreground */
-.hero-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.hero-inner--split {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-  gap: 32px;
-  align-items: center;
-}
-
-/* --- 互換 alias（旧トップの .hero-inner--fullscreen を救う） --- */
-.hero-inner--fullscreen {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-  gap: 32px;
-  align-items: center;
-}
-
-.hero-inner--single {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 18px;
-}
-
-.hero-text {
-  max-width: 680px;
-}
-
-.hero-kicker {
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(229, 240, 255, 0.85);
-  margin-bottom: 10px;
-}
-
-.hero-title {
-  font-size: clamp(2rem, 3.2vw + 1rem, 2.9rem);
-  line-height: 1.15;
-  margin-bottom: 14px;
-  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-}
-
-.hero-name {
-  background: linear-gradient(135deg, #dbeafe, #38bdf8, #0ea5e9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero-desc {
-  font-size: 1rem;
-  line-height: 1.65;
-  color: rgba(249, 251, 255, 0.95);
-  max-width: 44rem;
-  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-/* Actions */
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 9px 18px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: transform 0.16s ease, box-shadow 0.16s ease,
-    background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  color: #0b1120;
-  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.6);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.8);
-}
-
-.btn-ghost {
-  background: rgba(15, 23, 42, 0.75);
-  border-color: rgba(56, 189, 248, 0.55);
-  color: #e5f0ff;
+  padding:9px 12px;
+  border-radius:999px;
+  background: rgba(2,6,23,0.50);
+  border: 1px solid rgba(56,189,248,0.28);
+  color: rgba(229,240,255,0.92);
   backdrop-filter: blur(10px);
+  cursor:pointer;
+
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
-.btn-ghost:hover {
-  background: rgba(15, 23, 42, 0.9);
+.swap-advance:hover{
+  transform: translateY(calc(100% - 1px));
+  background: rgba(2,6,23,0.62);
+  border-color: rgba(56,189,248,0.55);
 }
 
-/* Visual */
-.hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.swap-advance:active{
+  transform: translateY(calc(100% + 1px));
 }
 
-.hero-image {
-  max-width: 100%;
-  border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.55);
-  box-shadow:
-    0 18px 36px rgba(15, 23, 42, 0.9),
-    0 0 0 1px rgba(15, 23, 42, 0.95) inset;
-  background: rgba(2, 6, 23, 0.35);
-  backdrop-filter: blur(10px);
+.swap-advance__label{
+  font-size: 0.86rem;
+  line-height: 1;
+  white-space: nowrap;
 }
 
-/* === Sections / layout === */
-.section {
-  padding: 56px 6vw;
-}
-
-.container {
-  max-width: 1080px;
-  margin: 0 auto;
-}
-
-.section-title {
-  font-size: 1.35rem;
-  letter-spacing: 0.02em;
-  margin-bottom: 14px;
-}
-
-.section-lead {
-  color: rgba(229, 240, 255, 0.9);
-  line-height: 1.75;
-  margin-bottom: 22px;
-  max-width: 52rem;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-/* Cards */
-.card {
-  background: var(--card-bg);
-  border: 1px solid rgba(56, 189, 248, 0.22);
-  border-radius: 18px;
-  box-shadow: var(--shadow-soft);
-  padding: 18px 18px;
-  backdrop-filter: blur(14px);
-}
-
-.card-title {
-  font-size: 1.02rem;
-  margin-bottom: 10px;
-}
-
-.card-text {
-  color: rgba(229, 240, 255, 0.9);
-  line-height: 1.75;
-}
-
-.card-note {
-  color: rgba(203, 213, 245, 0.95);
-  line-height: 1.75;
-}
-
-.card-wide {
-  margin-top: 18px;
-}
-
-.hr-soft {
-  height: 1px;
-  border: 0;
-  background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.35), transparent);
-  margin: 18px 0;
-}
-
-/* Lists */
-.bullet-list {
-  margin-top: 10px;
-  padding-left: 18px;
-  display: grid;
-  gap: 8px;
-}
-
-.bullet-list li {
-  line-height: 1.65;
-  color: rgba(229, 240, 255, 0.92);
-}
-
-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.92em;
-  color: #e0f2fe;
-  background: rgba(2, 6, 23, 0.55);
-  border: 1px solid rgba(56, 189, 248, 0.22);
-  padding: 0.12em 0.4em;
-  border-radius: 8px;
-}
-
-/* Badges */
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 12px;
+.swap-progress{
+  font-size: 0.80rem;
+  line-height: 1;
+  padding: 6px 9px;
   border-radius: 999px;
-  font-size: 0.85rem;
-  color: rgba(229, 240, 255, 0.95);
-  background: rgba(15, 23, 42, 0.68);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(15,23,42,0.65);
+  border: 1px solid rgba(56,189,248,0.22);
+  color: rgba(229,240,255,0.90);
 }
 
-/* Timeline */
-.timeline {
-  display: grid;
-  gap: 14px;
-  margin-top: 10px;
+@media (prefers-reduced-motion: reduce){
+  .swap-deck.swap-deck--single .swap-card{ transition:none !important; transform:none !important; }
+  .swap-advance{ transition:none !important; }
+}
+/* ✅ Continueボタン分、次のカードにスペースを確保 */
+#timeline .swap-deck.swap-deck--single{
+  margin-bottom: 72px;
 }
 
-.timeline-item {
-  display: grid;
-  grid-template-columns: 84px minmax(0, 1fr);
-  gap: 14px;
-  align-items: start;
-}
-
-.timeline-tag {
-  height: fit-content;
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  color: #0b1120;
-  background: linear-gradient(135deg, #dbeafe, #38bdf8);
-}
-
-.timeline-body {
-  background: rgba(2, 6, 23, 0.35);
-  border: 1px solid rgba(56, 189, 248, 0.18);
-  border-radius: 16px;
-  padding: 14px 14px;
-}
-
-/* Forms (Contact) */
-.form {
-  display: grid;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.input,
-.textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(2, 6, 23, 0.45);
-  border: 1px solid rgba(56, 189, 248, 0.24);
-  color: var(--text-main);
-  outline: none;
-}
-
-.input:focus,
-.textarea:focus {
-  border-color: rgba(56, 189, 248, 0.55);
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
-}
-
-.textarea {
-  min-height: 140px;
-  resize: vertical;
-}
-
-.mini-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-}
-
-/* Footer */
-.site-footer {
-  padding: 16px 0 26px;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #e5e7eb;
-  opacity: 0.9;
-}
-
-/* === Responsive adjustments === */
-@media (max-width: 900px) {
-  .hero-inner--split,
-  .hero-inner--fullscreen {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .hero-visual {
-    margin-top: 18px;
-  }
-
-  .content-hero,
-  .content.content-hero {
-    padding-top: 64px;
-  }
-
-  .grid-3 {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 740px) {
-  .grid-2 {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .timeline-item {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding-inline: 5vw;
-  }
-
-  .content-hero,
-  .content.content-hero {
-    padding: 60px 5vw 32px;
-  }
-
-  .section {
-    padding: 44px 5vw;
-  }
+/* ✅ さらに「What I want to improve next」を下に（inline styleも上書き） */
+#timeline .swap-deck.swap-deck--single + .card.card-wide{
+  margin-top: 72px !important;
 }

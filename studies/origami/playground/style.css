@@ -1,0 +1,203 @@
+:root{
+  --bg:#0b0f14;
+  --panel:#0f1621;
+  --panel2:#111b28;
+  --text:#e8eef7;
+  --muted:#9fb2c9;
+  --border:rgba(255,255,255,.10);
+  --btn:#1b2a3e;
+  --btn2:#203550;
+  --primary:#2b7cff;
+  --danger:#ff4d4d;
+  --m:#ff3b30;   /* mountain */
+  --v:#2e86ff;   /* valley */
+  --c:#ffd60a;   /* cut */
+  --shape:#c7f9cc;
+  --grid:rgba(255,255,255,.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 16px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+}
+.topbar__h1{font-size:16px;font-weight:700;letter-spacing:.02em}
+.topbar__sub{font-size:12px;color:var(--muted);margin-top:2px}
+.topbar__link{color:var(--muted);text-decoration:none}
+.topbar__link:hover{color:var(--text)}
+
+.layout{
+  display:grid;
+  grid-template-columns: 320px 1fr;
+  height:calc(100% - 54px);
+}
+
+.sidebar{
+  overflow:auto;
+  border-right:1px solid var(--border);
+  background:var(--panel);
+  padding:12px;
+}
+
+.panel{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:12px;
+}
+.panel h2{
+  margin:0 0 8px 0;
+  font-size:13px;
+  color:var(--muted);
+  font-weight:700;
+  letter-spacing:.04em;
+}
+
+.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+
+.btn,.tool{
+  border:1px solid var(--border);
+  background:var(--btn);
+  color:var(--text);
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:13px;
+  cursor:pointer;
+}
+.btn:hover,.tool:hover{background:var(--btn2)}
+.btn:active,.tool:active{transform:translateY(1px)}
+
+.tool.active{
+  outline:2px solid rgba(43,124,255,.55);
+  background:rgba(43,124,255,.25);
+}
+
+.btn--primary{background:rgba(43,124,255,.25);border-color:rgba(43,124,255,.55)}
+.btn--primary:hover{background:rgba(43,124,255,.35)}
+.btn--danger{background:rgba(255,77,77,.18);border-color:rgba(255,77,77,.45)}
+.btn--danger:hover{background:rgba(255,77,77,.28)}
+
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.field{margin:6px 0;font-size:13px;color:var(--muted)}
+.field input[type="number"]{width:100%;margin-top:6px;padding:8px;border-radius:8px;border:1px solid var(--border);background:#0b1220;color:var(--text)}
+.hint{font-size:12px;color:var(--muted);line-height:1.4}
+
+.status{font-size:12px;color:var(--muted);line-height:1.4}
+.error{
+  margin-top:8px;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid rgba(255,77,77,.45);
+  background:rgba(255,77,77,.12);
+  font-size:12px;
+  color: #ffd1d1;
+  white-space:pre-wrap;
+}
+
+.legend{margin-top:10px;display:grid;gap:6px;font-size:12px;color:var(--muted)}
+.legend__item{display:flex;align-items:center;gap:8px}
+.sw{display:inline-block;width:22px;height:6px;border-radius:999px;background:#fff}
+.sw--m{background:var(--m)}
+.sw--v{background:var(--v)}
+.sw--c{background:var(--c)}
+.sw--shape{background:var(--shape)}
+
+.canvasWrap{position:relative;overflow:hidden}
+.canvas{
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at 20% 20%, rgba(255,255,255,.03), transparent 30%),
+             radial-gradient(circle at 70% 40%, rgba(255,255,255,.03), transparent 35%),
+             #070b10;
+}
+
+.help{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  /* Ensure the modal sits above the SVG on all browsers */
+  z-index: 50;
+  pointer-events: auto;
+}
+.help__card{
+  max-width:720px;
+  width:100%;
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  /* Avoid relying on the SVG <filter> (some browsers/extensions can interfere) */
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.help__card h3{margin:0 0 6px 0;font-size:16px}
+.help__card ul{margin:8px 0 0 16px;color:var(--muted);line-height:1.5}
+.help__note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.5}
+
+/* SVG styles */
+.grid-line{stroke:var(--grid);stroke-width:1}
+
+.shape-path{stroke:var(--shape);stroke-width:2;fill:rgba(199,249,204,.08)}
+.shape-path.selected{stroke:#ffffff;stroke-width:2.5}
+
+.handle{fill:#ffffff;stroke:#000;stroke-width:1;cursor:grab}
+.handle:hover{stroke:#2b7cff;stroke-width:2}
+
+.preview{stroke:#ffffff;stroke-width:2;stroke-dasharray:6 6;fill:none}
+
+.crease-m{stroke:var(--m);stroke-width:2;fill:none}
+.crease-v{stroke:var(--v);stroke-width:2;stroke-dasharray:6 6;fill:none}
+.cutline{stroke:var(--c);stroke-width:3;stroke-dasharray:10 8;fill:none}
+
+@media (max-width: 920px){
+  .layout{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .sidebar{border-right:none;border-bottom:1px solid var(--border)}
+}
+
+
+/* --- Force-hide overlays even if extensions/styles override [hidden] --- */
+#help[hidden],
+#helpOverlay[hidden],
+.modal[hidden],
+.overlay[hidden] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure help modal is always above canvas */
+#help, #helpOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+/* If you use separate overlay + panel */
+#helpOverlay {
+  background: rgba(0,0,0,0.6);
+}
+
+#helpPanel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
