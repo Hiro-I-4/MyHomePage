@@ -28,10 +28,7 @@ export class Exporter {
         generator: 'foldcut-webapp-demo',
         createdAt: new Date().toISOString(),
       },
-      cutLine: result.cutLine ? {
-        a: { x: roundTo(result.cutLine.a.x), y: roundTo(result.cutLine.a.y) },
-        b: { x: roundTo(result.cutLine.b.x), y: roundTo(result.cutLine.b.y) },
-      } : null,
+      
       creases: (result.creases ?? []).map(c => ({
         kind: c.kind,
         a: { x: roundTo(c.a.x), y: roundTo(c.a.y) },
@@ -76,11 +73,7 @@ export class Exporter {
       }
       lines.push(`</g>`);
 
-      if (result.cutLine) {
-        lines.push(`<g id="cut" fill="none" stroke="#f0b400" stroke-width="3" stroke-dasharray="10 8">`);
-        lines.push(`<line x1="${result.cutLine.a.x}" y1="${result.cutLine.a.y}" x2="${result.cutLine.b.x}" y2="${result.cutLine.b.y}" />`);
-        lines.push(`</g>`);
-      }
+      
     }
 
     lines.push(`</svg>`);

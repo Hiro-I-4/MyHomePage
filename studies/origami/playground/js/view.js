@@ -124,17 +124,6 @@ export class SVGView {
       this.gResult.appendChild(line);
     }
 
-    // 3) cut line (single straight cut)
-    if (resultLayer.cutLine) {
-      const { a, b } = resultLayer.cutLine;
-      const line = svgEl('line', {
-        x1: a.x,
-        y1: a.y,
-        x2: b.x,
-        y2: b.y,
-        class: 'cutline',
-      });
-      this.gResult.appendChild(line);
-    }
+    
   }
 }

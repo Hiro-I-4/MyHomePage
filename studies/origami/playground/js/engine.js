@@ -275,17 +275,14 @@ export class FoldAndCutEngine {
     const allPts = skeleton.vertices.map(v => pt(v[0], v[1]));
     const bb = bboxOfPoints(allPts);
     const y = (bb.minY + bb.maxY) / 2;
-    const cutLine = {
-      a: pt(0, y),
-      b: pt(viewport.w, y),
-    };
+    
 
     // 4) return
     return {
       rings,
       skeleton,
       creases,
-      cutLine,
+      
     };
   }
 }

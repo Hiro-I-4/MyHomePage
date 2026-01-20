@@ -72,12 +72,12 @@ class App {
 
   async _initEngine() {
     try {
-      this.setStatus('Straight Skeleton エンジンを初期化中…');
+      this.setStatus('Initializing the Straight Skeleton engine…');
       await this.engine.init();
-      this.setStatus('Ready. 図形を描いて Run を押してください。');
+      this.setStatus('Ready. Draw a shape and click Run.');
     } catch (e) {
       this.showError(String(e?.message ?? e));
-      this.setStatus('エンジン初期化に失敗しました（ネットワーク/ブラウザ制限の可能性）。');
+      this.setStatus('Failed to initialize the engine (possible network/browser restrictions).');
     }
   }
 
@@ -138,7 +138,7 @@ class App {
     // local save/load
     this.ui.btnSaveLocal.addEventListener('click', () => {
       this._saveLocal();
-      this.setStatus('ローカル保存しました。');
+      this.setStatus('Saved locally.');
     });
     this.ui.btnLoadLocal.addEventListener('click', () => {
       this._loadLocal();
@@ -263,14 +263,14 @@ class App {
   async run() {
     this.clearError();
     try {
-      this.setStatus('計算中…（straight skeleton）');
+      this.setStatus('Computing… (straight skeleton)');
       const res = await this.engine.run(this.project, this.selectedShapeId, this.view.viewport);
       this.result = res;
       this.render();
-      this.setStatus(`完了: creases=${res.creases?.length ?? 0} / rings=${res.rings?.length ?? 0}`);
+      this.setStatus(`Done: creases=${res.creases?.length ?? 0} / rings=${res.rings?.length ?? 0}`);
     } catch (e) {
       this.showError(String(e?.message ?? e));
-      this.setStatus('失敗: 入力図形を見直してください。');
+      this.setStatus('Failed: please review your input shape.');
     }
   }
 
@@ -314,7 +314,7 @@ class App {
       this.history.redoStack = [];
 
       // UI sync
-      this.setStatus('前回の自動保存を読み込みました。');
+      this.setStatus('Loaded the previous autosave.');
     } catch {
       // ignore
     }
@@ -332,7 +332,7 @@ class App {
     try {
       const raw = localStorage.getItem(LOCAL_KEY + '_manual');
       if (!raw) {
-        this.showError('ローカル保存が見つかりません。');
+        this.showError('No local save found.');
         return;
       }
       const obj = JSON.parse(raw);
@@ -342,7 +342,7 @@ class App {
       this.selectedShapeId = null;
       this.result = null;
       this.render();
-      this.setStatus('ローカル保存を読み込みました。');
+      this.setStatus('Loaded the local save.');
     } catch (e) {
       this.showError(String(e?.message ?? e));
     }
@@ -358,9 +358,9 @@ class App {
       this.selectedShapeId = null;
       this.result = null;
       this.render();
-      this.setStatus('インポート完了。');
+      this.setStatus('Import complete.');
     } catch (e) {
-      this.showError('インポートに失敗しました: ' + String(e?.message ?? e));
+      this.showError('Import failed: ' + String(e?.message ?? e));
     }
   }
 }
